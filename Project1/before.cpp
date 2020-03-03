@@ -1,3 +1,4 @@
+/*
 #include <sstream>
 #include <vector>
 #include <iterator>
@@ -1438,3 +1439,4 @@ int user::search_song(admin& A)
 	cout << "输入不合法" << endl;
 	return 0;
 }
+*/

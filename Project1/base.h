@@ -9,13 +9,14 @@ class student;
 class course {
 public:
 	string course_name;
-	vector<student>all_student;
+	vector<int>all_student_ID;
 	vector<int>score;
 };
 
 class student {
 public:	
 	student(int a,string b,string c,int d);
+	int display_infor();
 private:
 	int student_ID;
 	string student_name;
@@ -24,11 +25,30 @@ private:
 	vector<int>course_id;
 };
 
-class School {
+class department {
 public:
+	string department_name;
 	vector<student> student_list;
 	vector<course>course_list;
-	int insert_student();
-	int search_student();
-
 };
+
+class School {
+public:
+	vector<department>my_school;
+	int insert_student();
+	int delete_student();
+	int search_student();
+	int adjust_student();
+	int file_out();
+	int file_in();
+	int show_menu();
+	int run();
+};
+
+student::student(int a, string b, string c, int d)
+{
+	student_ID = a;
+	student_name = b;
+	department_name = c;
+	class_ID = d;
+}
