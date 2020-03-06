@@ -7,6 +7,7 @@
 #include<iomanip>
 #include"base.h"
 using namespace std;
+
 student::student(int a, string b, string c, int d)
 {
 	student_ID = a;
@@ -54,7 +55,8 @@ int School::show_menu()
 
 int School::my_run()
 {
-	int opnumtemp = 100;
+	int opnumtemp;
+	opnumtemp = 100;
 	while (opnumtemp != 3)
 	{
 		opnumtemp = show_menu();
@@ -68,33 +70,37 @@ int School::my_run()
 	return 0;
 }
 
+vector<student> School::student_file_in(string path)
+{
+    fstream infile;
+    infile.open(path);
+}
+
 int School::file_in()
 {
 	fstream infile;
 	string filesite = "cache/init.txt";
-	int sus(0);
-	int fai(0);
 	rewind(stdin);
 	infile.open(filesite);
 	if (infile.fail())
-	{
+	{	
 		cout << "缺失依赖性关键文件，重新创建中" << endl;
 		infile.open("cache/init.txt", std::ios::out | std::ios::app);
 		Sleep(2000);
 		return 0;
 	}
-	vector<string>temp;
 	for (int j(1); !infile.eof(); )
 	{	
 		string temp_name;
 		infile >> temp_name;
-		temp_name += ".txt";
-		temp.push_back(temp_name);
+		department temp2;
+		temp2.department_name = temp_name;
+		my_school.push_back(temp2);
 	}
-	//temp.pop_back();
-	for (int i(0); i < temp.size(); i++)
+	for (int i(0); i < my_school.size(); i++)
 	{
-		cout << temp[i] << endl;
+		string file_path = "cache/" + my_school[i].department_name;
+		
 	}
 	return 1;
 }
@@ -154,7 +160,7 @@ int School::insert_student()
 		}
 		if (department_code == -1)
 		{
-			cout << "the department " << temp_department_name << " does not exsit" << endl;
+			cout << "the department " << temp_department_name << " does not exists" << endl;
 			return 0;
 		}
 		else

@@ -18,7 +18,7 @@ class student {
 public:	
 	friend School;
 	student(int a,string b,string c,int d);
-	int display_infor();
+	int display_info();
 private:
 	int student_ID;
 	string student_name;
@@ -45,6 +45,8 @@ public:
 	int file_in();
 	int show_menu();
 	int my_run();
+	vector<student> student_file_in(string file);
+	vector<course> course_file_in(string file);
 };
 
 
