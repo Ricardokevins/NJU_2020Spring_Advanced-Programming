@@ -11,6 +11,7 @@ int main()
 	//test of file_in system
 	
 	b.file_in();
+	/*
 	for(int i(0);i<b.my_school.size();i++)
 	{
 		cout<<b.my_school[i].department_name<<endl;
@@ -24,10 +25,12 @@ int main()
 	{
 		b.my_school[0].course_list[i].show_infor();
 	}
+	*/
+
 	///int a;
 	//cin>>a;
 	//return 0;
-	//b.insert_student();
+	b.insert_student();
 	b.file_out();
 	int a;
 	cin>>a;

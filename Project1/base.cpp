@@ -232,8 +232,8 @@ int School::file_out()
 
 int School::insert_student()
 {
-	while (1)
-	{
+	//while (1)
+	//{
 		string temp_name;
 		int temp_ID;
 		int temp_class_ID;
@@ -268,8 +268,9 @@ int School::insert_student()
 		{
 			student temp(temp_ID, temp_name, temp_department_name, temp_class_ID);
 			my_school[department_code].student_list.push_back(temp);		
+			return 1;
 		}
-	}
+	//}
 	return 1;
 }
 
