@@ -24,8 +24,11 @@ int main()
 	{
 		b.my_school[0].course_list[i].show_infor();
 	}
-
-	b.insert_student();
+	///int a;
+	//cin>>a;
+	//return 0;
+	//b.insert_student();
+	b.file_out();
 	int a;
 	cin>>a;
 	return 0;

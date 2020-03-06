@@ -184,16 +184,8 @@ vector<student> School::student_file_in(string path)
 		student a=student(temp_ID,temp_student_name,temp_department_name,temp_class_ID);
 		result.push_back(a);
 	}
-	//result.pop_back();
-	//for(int i(0);i<result.size();i++)
-	//{
-	//	if(result[i].student_ID==0)
-	//	{
-	//		result.erase(result.begin()+i);
-	//		continue;
-	//	}
-	//	result[i].display_info();
-	//}
+	result.pop_back();
+	//cout<<"result"<<result.size()<<endl;	
 	return result;
 }
 
@@ -304,11 +296,13 @@ void department::student_file_out(string file)
 		Sleep(2000);
 		return;
 	}
+	//cout<<student_list.size()<<endl;
 	for(int i(0);i<student_list.size();i++)
 	{
 		myoperate << student_list[i].student_ID << " ";
-		myoperate << student_list[i].student_name << " ";
+		//cout<<student_list[i].student_ID << endl;
 		myoperate << student_list[i].class_ID << " ";
+		myoperate << student_list[i].student_name << " ";
 		myoperate << student_list[i].department_name << " ";
 		myoperate <<endl;
 	}
@@ -330,7 +324,8 @@ void department::course_file_out(string file)
 	{
 		myoperate << "begin"<<endl;
 		myoperate << course_list[i].course_name << endl;
-		for(int j(0);i<course_list[i].all_student_ID.size();j++)
+		//cout<<"size "<<course_list[i].all_student_ID.size()<<endl;
+		for(int j(0);j<course_list[i].all_student_ID.size();j++)
 		{
 			myoperate << course_list[i].all_student_ID[j]<<" "<<course_list[i].score[j]<<endl;
 		}
