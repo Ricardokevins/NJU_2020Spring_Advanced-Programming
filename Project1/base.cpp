@@ -68,6 +68,80 @@ int student::display_info()
 	cout<<"ID："<<student_ID<<" 姓名："<<student_name<<"class："<<class_ID<<" 院系："<<department_name<<endl<<endl;
 	return 0;
 }
+
+vector<course> School::course_file_in(string path)
+{
+	fstream infile;
+	path+="/course.txt";
+    infile.open(path.c_str());
+	vector<course>result;
+	if (infile.fail())
+	{	
+		cout << "缺失依赖性关键文件，重新创建中" << endl;
+		infile.open(path.c_str(), std::ios::out | std::ios::app);
+		Sleep(2000);
+		return result;
+	}
+	int read_flag=0;
+	vector<int>temp_ID;
+	vector<int>temp_score;
+	string temp_course_name;
+	for (; !infile.eof(); )
+	{	
+		string temp;
+		infile>>temp;
+		if(temp=="")
+			break;
+		cout<<"temp"<<temp<<endl;
+		if(read_flag==0&&temp=="begin")
+		{
+			read_flag=1;
+			continue;
+		}
+		if(read_flag==1)
+		{
+			temp_course_name=temp;
+			read_flag=2;
+			continue;
+		}
+		if(temp=="end")
+		{
+			course a;
+			a.course_name=temp_course_name;
+			temp_course_name="";
+			a.all_student_ID=temp_ID;
+			temp_ID.clear();
+			a.score=temp_score;
+			temp_score.clear();
+			read_flag=0;
+			continue;
+		}
+		if(read_flag==2)
+		{
+			int hh;
+			stringstream ss;
+			ss<<temp;
+			ss>>hh;
+			temp_ID.push_back(hh);
+			read_flag=3;
+			continue;
+		}
+		if(read_flag==3)
+		{
+			int hh;
+			stringstream ss;
+			ss<<temp;
+			ss>>hh;
+			temp_score.push_back(hh);
+			read_flag=2;
+			continue;
+		}
+	}
+	
+	
+	return result;
+}
+
 vector<student> School::student_file_in(string path)
 {
     fstream infile;
