@@ -17,7 +17,12 @@ public:
 class student {
 public:	
 	friend School;
-	student(int a,string b,string c,int d);
+	student(int a,string b,string c,int d){
+	student_ID = a;
+	student_name = b;
+	department_name = c;
+	class_ID = d;
+}
 	int display_info();
 private:
 	int student_ID;

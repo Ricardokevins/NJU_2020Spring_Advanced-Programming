@@ -4,10 +4,9 @@ using namespace std;
 
 int main()
 {
-	School temp;
-	department a;
-	
-	return 0;
-	temp.my_run();
+	School b;
+	b.file_in();
+	int a;
+	cin>>a;
 	return 0;
 }
