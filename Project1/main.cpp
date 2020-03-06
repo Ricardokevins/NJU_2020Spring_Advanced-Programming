@@ -5,6 +5,9 @@ using namespace std;
 int main()
 {
 	School temp;
-	temp.file_in();
+	department a;
+	
+	return 0;
+	temp.my_run();
 	return 0;
 }

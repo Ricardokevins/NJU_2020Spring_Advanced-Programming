@@ -1,0 +1,5 @@
+﻿  base.cpp
+D:\New_desktop\Project1\base.cpp(95,19): warning C4018: “<”: 有符号/无符号不匹配
+D:\New_desktop\Project1\base.cpp(113,19): warning C4018: “<”: 有符号/无符号不匹配
+D:\New_desktop\Project1\base.cpp(147,20): warning C4018: “<”: 有符号/无符号不匹配
+  Project1.vcxproj -> D:\New_desktop\Project1\Debug\Project1.exe

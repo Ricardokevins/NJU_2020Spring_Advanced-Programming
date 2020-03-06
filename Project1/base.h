@@ -1,11 +1,12 @@
 #pragma once
+
 #include<string>
 #include<vector>
 #include<iostream>
 using namespace std;
 
 class student;
-
+class School;
 class course {
 public:
 	string course_name;
@@ -15,6 +16,7 @@ public:
 
 class student {
 public:	
+	friend School;
 	student(int a,string b,string c,int d);
 	int display_infor();
 private:
@@ -42,13 +44,8 @@ public:
 	int file_out();
 	int file_in();
 	int show_menu();
-	int run();
+	int my_run();
 };
 
-student::student(int a, string b, string c, int d)
-{
-	student_ID = a;
-	student_name = b;
-	department_name = c;
-	class_ID = d;
-}
+
+

@@ -1,12 +1,19 @@
 #include<iostream>
 #include<vector>
-#include"base.h"
+
 #include <fstream>
 #include <sstream>
 #include <Windows.h>
 #include<iomanip>
-
+#include"base.h"
 using namespace std;
+student::student(int a, string b, string c, int d)
+{
+	student_ID = a;
+	student_name = b;
+	department_name = c;
+	class_ID = d;
+}
 
 int School::show_menu()
 {
@@ -45,7 +52,7 @@ int School::show_menu()
 	}
 }
 
-int School::run()
+int School::my_run()
 {
 	int opnumtemp = 100;
 	while (opnumtemp != 3)
@@ -58,7 +65,7 @@ int School::run()
 		case 2:delete_student(); break;
 		}
 	}
-	
+	return 0;
 }
 
 int School::file_in()
@@ -84,7 +91,7 @@ int School::file_in()
 		temp_name += ".txt";
 		temp.push_back(temp_name);
 	}
-	temp.pop_back();
+	//temp.pop_back();
 	for (int i(0); i < temp.size(); i++)
 	{
 		cout << temp[i] << endl;
@@ -109,6 +116,7 @@ int School::file_out()
 		department_name = my_school[i].department_name;
 		myoperate << department_name << endl;
 	}
+	myoperate.close();
 	cout << "文件导出成功,返回上一级" << endl;
 	Sleep(2000);
 	
@@ -117,7 +125,6 @@ int School::file_out()
 
 int School::insert_student()
 {
-
 	while (1)
 	{
 		string temp_name;
@@ -147,6 +154,19 @@ int School::insert_student()
 		}
 		if (department_code == -1)
 		{
-
+			cout << "the department " << temp_department_name << " does not exsit" << endl;
+			return 0;
 		}
+		else
+		{
+			student temp(temp_ID, temp_name, temp_department_name, temp_class_ID);
+			my_school[department_code].student_list.push_back(temp);		
+		}
+	}
+	return 1;
+}
+
+int School::delete_student()
+{
+	return 0;
 }
