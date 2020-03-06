@@ -63,6 +63,11 @@ int School::my_run()
 	return 0;
 }
 
+int student::display_info()
+{
+	cout<<"ID£º"<<student_ID<<" ÐÕÃû£º"<<student_name<<"class£º"<<class_ID<<" ÔºÏµ£º"<<department_name<<endl<<endl;
+	return 0;
+}
 vector<student> School::student_file_in(string path)
 {
     fstream infile;
@@ -85,15 +90,26 @@ vector<student> School::student_file_in(string path)
 		int temp_ID;
 		ss>>temp_ID;
 		infile >> temp;
-		ss<<temp;
+		stringstream ss2;
+		ss2<<temp;
 		int temp_class_ID;
-		ss>>temp_class_ID;
+		ss2>>temp_class_ID;
 		string temp_student_name;
 		string temp_department_name;
 		infile >>temp_student_name;
 		infile >>temp_department_name;
 		student a=student(temp_ID,temp_student_name,temp_department_name,temp_class_ID);
 		result.push_back(a);
+	}
+	//result.pop_back();
+	for(int i(0);i<result.size();i++)
+	{
+		if(result[i].student_ID==0)
+		{
+			result.erase(result.begin()+i);
+			continue;
+		}
+		result[i].display_info();
 	}
 	return result;
 }
@@ -119,6 +135,7 @@ int School::file_in()
 		temp2.department_name = temp_name;
 		my_school.push_back(temp2);
 	}
+	my_school.pop_back();
 	for (int i(0); i < my_school.size(); i++)
 	{
 		string file_path = "cache/" + my_school[i].department_name;
