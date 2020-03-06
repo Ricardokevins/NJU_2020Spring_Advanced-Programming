@@ -12,6 +12,7 @@ public:
 	string course_name;
 	vector<int>all_student_ID;
 	vector<int>score;
+	int show_infor();
 };
 
 class student {
@@ -37,6 +38,9 @@ public:
 	string department_name;
 	vector<student> student_list;
 	vector<course>course_list;
+	void student_file_out(string file);
+	void course_file_out(string file);
+	void file_out();
 };
 
 class School {
@@ -52,6 +56,7 @@ public:
 	int my_run();
 	vector<student> student_file_in(string file);
 	vector<course> course_file_in(string file);
+	
 };
 
 

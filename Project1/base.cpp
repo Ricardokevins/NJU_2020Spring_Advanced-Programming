@@ -8,6 +8,14 @@
 #include"base.h"
 using namespace std;
 
+int course::show_infor()
+{
+	cout<<course_name<<endl;
+	for(int j(0);j<all_student_ID.size();j++)
+	{
+		cout<<all_student_ID[j]<<" "<<score[j]<<endl;
+	}
+}
 
 int School::show_menu()
 {
@@ -65,7 +73,7 @@ int School::my_run()
 
 int student::display_info()
 {
-	cout<<"ID："<<student_ID<<" 姓名："<<student_name<<"class："<<class_ID<<" 院系："<<department_name<<endl<<endl;
+	cout<<"ID："<<student_ID<<" 姓名："<<student_name<<" class："<<class_ID<<" 院系："<<department_name<<endl;
 	return 0;
 }
 
@@ -92,7 +100,7 @@ vector<course> School::course_file_in(string path)
 		infile>>temp;
 		if(temp=="")
 			break;
-		cout<<"temp"<<temp<<endl;
+		//cout<<"temp"<<temp<<endl;
 		if(read_flag==0&&temp=="begin")
 		{
 			read_flag=1;
@@ -114,6 +122,7 @@ vector<course> School::course_file_in(string path)
 			a.score=temp_score;
 			temp_score.clear();
 			read_flag=0;
+			result.push_back(a);
 			continue;
 		}
 		if(read_flag==2)
@@ -176,15 +185,15 @@ vector<student> School::student_file_in(string path)
 		result.push_back(a);
 	}
 	//result.pop_back();
-	for(int i(0);i<result.size();i++)
-	{
-		if(result[i].student_ID==0)
-		{
-			result.erase(result.begin()+i);
-			continue;
-		}
-		result[i].display_info();
-	}
+	//for(int i(0);i<result.size();i++)
+	//{
+	//	if(result[i].student_ID==0)
+	//	{
+	//		result.erase(result.begin()+i);
+	//		continue;
+	//	}
+	//	result[i].display_info();
+	//}
 	return result;
 }
 
@@ -214,6 +223,7 @@ int School::file_in()
 	{
 		string file_path = "cache/" + my_school[i].department_name;
 		my_school[i].student_list=student_file_in(file_path);	
+		my_school[i].course_list=course_file_in(file_path);
 	}
 	return 1;
 }
@@ -221,25 +231,10 @@ int School::file_in()
 int School::file_out()
 {
 	fstream myoperate;
-	string path="cache/init.txt";
-	myoperate.open(path.c_str(), ofstream::out);
-	if (myoperate.fail())
+	for(int i(0);i<my_school.size();i++)
 	{
-		cout << "文件导出失败!!!" << endl;
-		Sleep(2000);
-		return 0;
+		my_school[i].file_out();
 	}
-	
-	for (int i(0); i < my_school.size(); i++)
-	{
-		string department_name;
-		department_name = my_school[i].department_name;
-		myoperate << department_name << endl;
-	}
-	myoperate.close();
-	cout << "文件导出成功,返回上一级" << endl;
-	Sleep(2000);
-	
 	return 0;
 }
 
@@ -290,3 +285,29 @@ int School::delete_student()
 {
 	return 0;
 }
+
+void department::file_out()
+{
+	string file_path="cache/"+department_name;
+	student_file_out(file_path);
+	course_file_out(file_path);
+}
+
+void department::student_file_out(string file)
+{
+	string file_path=file+"/student.txt";
+	fstream myoperate;
+	myoperate.open(file_path.c_str(), ofstream::out);
+	if (myoperate.fail())
+	{
+		cout << "文件导出失败!!!" << endl;
+		Sleep(2000);
+		return;
+	}
+	for(int i(0);i<student_list.size();i++)
+	{
+		
+	}
+
+}
+	
