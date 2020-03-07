@@ -64,7 +64,7 @@ int School::my_run()
 		opnumtemp = show_menu();
 		switch (opnumtemp)
 		{
-			case 6:cout << "再见，感谢使用，欢迎下次再来" << endl; file_out();break;
+			case 6:cout << "再见，感谢使用，欢迎下次再来" << endl; file_out();Sleep(2000);return 0;
 			case 1:insert_student(); break;
 			case 2:delete_student(); break;
 		}
