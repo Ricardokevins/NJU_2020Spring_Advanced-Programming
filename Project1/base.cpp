@@ -58,14 +58,15 @@ int School::my_run()
 {
 	int opnumtemp;
 	opnumtemp = 100;
+	file_in();
 	while (opnumtemp != 3)
 	{
 		opnumtemp = show_menu();
 		switch (opnumtemp)
 		{
-		case 6:cout << "再见，感谢使用，欢迎下次再来" << endl; break;
-		case 1:insert_student(); break;
-		case 2:delete_student(); break;
+			case 6:cout << "再见，感谢使用，欢迎下次再来" << endl; file_out();break;
+			case 1:insert_student(); break;
+			case 2:delete_student(); break;
 		}
 	}
 	return 0;
@@ -217,6 +218,16 @@ int School::file_in()
 		my_school[i].student_list=student_file_in(file_path);	
 		my_school[i].course_list=course_file_in(file_path);
 	}
+	for(int i(0);i<my_school.size();i++)
+	{
+		for(int j(0);j<my_school[i].course_list.size();j++)
+		{
+			for(int l(0);l<my_school[i].course_list[j].all_student_ID.size();l++)
+			{
+				my_school[i].student_list[my_school[i].course_list[j].all_student_ID[l]].course_id.push_back(j);
+			}
+		}
+	}
 	return 1;
 }
 
@@ -276,6 +287,31 @@ int School::insert_student()
 
 int School::delete_student()
 {
+	system("cls");
+	int temp_ID;
+	system("color f1");
+	cout << "输入学生学号" << endl;
+	cin >> temp_ID;
+	for(int i(0);i<my_school.size();i++)
+	{
+		for(int j(0);j<my_school[i].student_list.size();j++)
+		{
+			if(my_school[i].student_list[j].student_ID==temp_ID)
+			{
+				for(int k(0);k<my_school[i].student_list[j].course_id.size();k++)
+				{
+					my_school[i].course_list[my_school[i].student_list[j].course_id[k]].all_student_ID.erase(my_school[i].course_list[my_school[i].student_list[j].course_id[k]].all_student_ID.begin()+j);
+					my_school[i].course_list[my_school[i].student_list[j].course_id[k]].score.erase(my_school[i].course_list[my_school[i].student_list[j].course_id[k]].score.begin()+j);
+				}
+				my_school[i].student_list.erase(my_school[i].student_list.begin()+j);
+				cout<<"find the Student and delete"<<endl;
+				Sleep(2000);
+				return 1;
+			}
+		}
+	}
+	cout<<"mo match result and return in 2 second"<<endl;
+	Sleep(2000);
 	return 0;
 }
 

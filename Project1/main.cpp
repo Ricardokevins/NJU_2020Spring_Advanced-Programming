@@ -10,7 +10,7 @@ int main()
 
 	//test of file_in system
 	
-	b.file_in();
+	//b.file_in();
 	/*
 	for(int i(0);i<b.my_school.size();i++)
 	{
@@ -30,8 +30,10 @@ int main()
 	///int a;
 	//cin>>a;
 	//return 0;
-	b.insert_student();
-	b.file_out();
+	//b.insert_student();
+	//b.file_out();
+
+	b.my_run();
 	int a;
 	cin>>a;
 	return 0;
