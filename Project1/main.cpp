@@ -6,7 +6,7 @@ int main()
 {
 	School b;
 	//b.file_in();
-	//vector<course>c=b.course_file_in("cache/¼ÆËã»úÏµ");
+	//vector<course>c=b.course_file_in("cache/è®¡ç®—æœºç³»");
 
 	//test of file_in system
 	
@@ -35,6 +35,7 @@ int main()
 
 	b.my_run();
 	int a;
+	cout<<"come to end "<<endl;
 	cin>>a;
 	return 0;
 }

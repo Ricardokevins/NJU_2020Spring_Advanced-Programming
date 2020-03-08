@@ -67,6 +67,7 @@ int School::my_run()
 			case 6:cout << "再见，感谢使用，欢迎下次再来" << endl; file_out();Sleep(2000);return 0;
 			case 1:insert_student(); break;
 			case 2:delete_student(); break;
+			case 3:search_student(); break;
 		}
 	}
 	return 0;
@@ -371,3 +372,74 @@ void department::course_file_out(string file)
 	return;
 }
 	
+int School::search_student()
+{
+	int flag(1);
+	int temp_de_ID=0;
+	int temp_de_pos=0;
+	int temp_ID=0;
+	while(flag==1)
+	{
+		system("cls");
+		system("color f1");
+		cout<<"输入带查询的学号,或输入-1放弃"<<endl;		
+		cin>>temp_ID;
+		if(temp_ID==-1)
+			break;	
+		for(int i(0);i<my_school.size();i++)
+		{
+			for(int j(0);j<my_school[i].student_list.size();j++)
+			{
+				if(my_school[i].student_list[j].student_ID==temp_ID)
+				{
+					flag=2;
+					temp_de_ID=i;
+					temp_de_pos=j;
+					break;
+				}
+			}
+			if(flag==2)
+			{
+				break;
+			}
+		}
+		if(flag==2)
+		{
+			break;
+		}
+		else
+		{
+			cout<<"没有找到这个学生"<<endl;
+			Sleep(2000);
+		}
+		
+	}
+	system("cls");
+	system("color f1");
+	if(temp_ID==-1)
+		return 0;
+	cout << left << setw(10) << "学号" << "|";
+	cout << left << setw(20) << "名字" << "|";
+	cout << left << setw(10) << "班级号" << "|";
+	cout << left << setw(20) << "院系"  << endl;
+	cout << left << setw(10) << my_school[temp_de_ID].student_list[temp_de_pos].student_ID << "|";
+	cout << left << setw(20) << my_school[temp_de_ID].student_list[temp_de_pos].student_name << "|";
+	cout << left << setw(10) << my_school[temp_de_ID].student_list[temp_de_pos].class_ID << "|";
+	cout << left << setw(20) << my_school[temp_de_ID].student_list[temp_de_pos].department_name  << endl;
+	cout << endl;
+
+	cout << left << setw(30) << "课程名" << "|";
+	cout << left << setw(30) << "成绩" << endl;
+	for(int i(0);i< my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();i++)
+	{
+		cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
+		cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
+	}
+	cout<<endl;
+	cout<<"输入C继续,其他任意键返回"<<endl;
+	string a;
+	cin>>a;
+	if(a=="C")
+		search_student();
+	return 0;
+}
