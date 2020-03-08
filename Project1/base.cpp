@@ -594,14 +594,189 @@ int School::adjust_student()
 			{
 				string course_name;
 				cout<<"输入想要处理的对应课程的名字"<<endl;
-				cin>>course_name;				
-				for(int i(0);i< my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();i++)
+				cin>>course_name;		
+				int find_flag=0;
+				int find_pos=0;		
+				for(int i(0);i< my_school[temp_de_ID].course_list.size();i++)
 				{
-					cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
-					cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
+					if(my_school[temp_de_ID].course_list[i].course_name==course_name)
+					{
+						find_flag=1;
+						find_pos=i;
+						break;
+					}
+				}
+				if(find_flag)
+				{					
+					int temp_score=0;
+					cout<<"添加初始成绩"<<endl;
+					cin>>temp_score;
+					if(temp_score>100||temp_score<0)
+					{
+						cout<<"输入不合法，返回"<<endl;
+						Sleep(2000);
+						return 0;
+					}
+					my_school[temp_de_ID].course_list[find_pos].add_student(temp_de_pos,temp_score);
+					my_school[temp_de_ID].student_list[temp_de_pos].add_course(find_pos);
+					cout<<"处理成功，返回中"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+				else
+				{
+					cout<<"本院系没有这个课程，返回上一级"<<endl;
+					Sleep(2000);
+					return 0;
 				}
 			}
-		}
+			if(res2==2)
+			{
+				string course_name;
+				cout<<"输入想要处理的对应课程的名字"<<endl;
+				cin>>course_name;		
+				int find_flag=0;
+				int find_pos=0;	
+				for(int j(0);j<my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();j++)
+				{
+					if(my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[j]].course_name==course_name)
+					{
+						find_flag=1;
+						find_pos=my_school[temp_de_ID].student_list[temp_de_pos].course_id[j];
+						my_school[temp_de_ID].student_list[temp_de_pos].delete_course(find_pos);
+						break;
+					}
+					
+				}
+				if(find_flag)
+				{
+					my_school[temp_de_ID].course_list[find_pos].delete_student(temp_de_pos);
+					cout<<"处理成功，返回中"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+				else
+				{
+					cout<<"这个学生就没选这个课程，返回上一级"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+			}
+			if(res2==3)
+			{
+				string course_name;
+				cout<<"输入想要处理的对应课程的名字"<<endl;
+				cin>>course_name;		
+				int find_flag=0;
+				int find_pos=0;	
+				for(int j(0);j<my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();j++)
+				{
+					if(my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[j]].course_name==course_name)
+					{
+						find_flag=1;
+						find_pos=my_school[temp_de_ID].student_list[temp_de_pos].course_id[j];
+						break;
+					}
+					
+				}
+				if(find_flag)
+				{
+					cout<<"输入新的分数（注：0-100）"<<endl;
+					int new_score;
+					cin>>new_score;
+					if(new_score<0||new_score>100)
+					{
+						cout<<"输入成绩并不合法，退出"<<endl;
+						Sleep(2000);
+						return 0;
+					}
+					my_school[temp_de_ID].course_list[find_pos].adjust_score(temp_de_pos,new_score);
+					cout<<"处理成功，返回中"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+				else
+				{
+					cout<<"这个学生就没选这个课程，返回上一级"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+			}
+			cout<<"返回中"<<endl;
+			Sleep(2000);
+			return 0;
 
+		}
+		if(res==5)
+		{
+			cout<<"输入待转的系"<<endl;
+			string de_name;
+			cin>>de_name;
+			//Todo:
+			int depart_num(-1);
+			for(int i(0);i<my_school.size();i++)
+			{
+				if(my_school[i].department_name==de_name)
+				{
+					depart_num=i;
+					break;
+				}
+			}
+			if(depart_num==-1)
+			{
+				cout<<"没有这个系"<<endl;
+				Sleep(2000);
+				return 0;
+			}
+			if(depart_num==temp_de_ID)
+			{
+				cout<<"不允许转自己系"<<endl;
+				Sleep(2000);
+				return 0;
+			}
+			for(int i(0);i<my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();i++)
+			{
+				my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].delete_student(temp_de_pos);
+				my_school[temp_de_ID].student_list[temp_de_pos].delete_course(i);
+			}
+			student cache_a=student(my_school[temp_de_ID].student_list[temp_de_pos]);
+			my_school[temp_de_ID].student_list.erase(my_school[temp_de_ID].student_list.begin()+temp_de_pos);
+			my_school[depart_num].student_list.push_back(cache_a);
+			cout<<"转系完成"<<endl;
+			Sleep(2000);
+			return 0;
+
+		}
 	}
+}
+
+int course::delete_student(int ID)
+{
+	all_student_ID.erase(all_student_ID.begin()+ID);
+	score.erase(score.begin()+ID);
+	return 1;				
+}
+
+int course::add_student(int ID,int scores)
+{
+	all_student_ID.push_back(ID);
+	score.push_back(scores);
+	return 1;				
+}
+
+int student::delete_course(int id)
+{
+	course_id.erase(course_id.begin()+id);
+	return 1;
+}
+
+int student::add_course(int id)
+{
+	course_id.push_back(id);
+	return 1;
+}
+int course::adjust_score(int id,int scores)
+{
+	score[id]=scores;
+	return 0;
 }

@@ -12,6 +12,9 @@ public:
 	string course_name;
 	vector<int>all_student_ID;
 	vector<int>score;
+	int delete_student(int ID);
+	int adjust_score(int id,int score);
+	int add_student(int id,int score);
 	int show_infor();
 };
 
@@ -23,6 +26,9 @@ public:
 	department_name = c;
 	class_ID = d;
 }
+	int add_course(int id);
+	int delete_course(int id);
+	
 	int display_info();
 	int student_ID;
 	string student_name;
