@@ -535,6 +535,73 @@ int School::adjust_student()
 		rewind(stdin);
 		string temp;
 		cin>>temp;
+		rewind(stdin);
+		int res;
+		stringstream ss;
+		ss << temp;
+		ss >> res;
+		if(res==1)
+		{
+			int temp2;
+			cout<<"请输入"<<endl;
+			cin>>temp2;
+			my_school[temp_de_ID].student_list[temp_de_pos].student_ID=temp2;
+			cout<<"修改成功"<<endl;
+			Sleep(2000);
+			return 0;
+		}
+		if(res==2)
+		{
+			string temp2;
+			cout<<"请输入"<<endl;
+			cin>>temp2;
+			my_school[temp_de_ID].student_list[temp_de_pos].student_name=temp2;
+			cout<<"修改成功"<<endl;
+			Sleep(2000);
+			return 0;
+		}
+		if(res==3)
+		{
+			int temp2;
+			cout<<"请输入"<<endl;
+			cin>>temp2;
+			my_school[temp_de_ID].student_list[temp_de_pos].class_ID=temp2;
+			cout<<"修改成功"<<endl;
+			Sleep(2000);
+			return 0;
+		}
+		if(res==4)
+		{
+			system("cls");
+			system("color f1");
+			printf("\n\n\t\t\t＋==============================＋\n");
+			printf("\t\t\t｜                              \n");
+			printf("\t\t\t｜  1->加课                 \n");
+			printf("\t\t\t｜  2->退课               \n");
+			printf("\t\t\t｜  2->改成绩               \n");
+			printf("\t\t\t｜  6->不改了算了               \n");
+			printf("\t\t\t｜  请输入选项[]                  \n");
+			printf("\t\t\t｜                              \n");
+			printf("\t\t\t＋==============================＋\n");
+			string temp3;
+			cin>>temp3;
+			rewind(stdin);
+			int res2;
+			stringstream sss;
+			sss << temp3;
+			sss >> res2;
+			if(res2==1)
+			{
+				string course_name;
+				cout<<"输入想要处理的对应课程的名字"<<endl;
+				cin>>course_name;				
+				for(int i(0);i< my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();i++)
+				{
+					cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
+					cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
+				}
+			}
+		}
 
 	}
 }
