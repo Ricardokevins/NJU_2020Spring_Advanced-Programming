@@ -1,4 +1,8 @@
 #include"base.h"
+#include"student.h"
+#include"course.h"
+#include"department.h"
+
 #include<iostream>
 using namespace std;
 

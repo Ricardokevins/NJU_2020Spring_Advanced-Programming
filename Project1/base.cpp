@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-
 #include <fstream>
 #include <sstream>
 #include <Windows.h>
@@ -8,14 +7,7 @@
 #include"base.h"
 using namespace std;
 
-int course::show_infor()
-{
-	cout<<course_name<<endl;
-	for(int j(0);j<all_student_ID.size();j++)
-	{
-		cout<<all_student_ID[j]<<" "<<score[j]<<endl;
-	}
-}
+
 
 int School::show_menu()
 {
@@ -73,11 +65,7 @@ int School::my_run()
 	return 0;
 }
 
-int student::display_info()
-{
-	cout<<"ID："<<student_ID<<" 姓名："<<student_name<<" class："<<class_ID<<" 院系："<<department_name<<endl;
-	return 0;
-}
+
 
 vector<course> School::course_file_in(string path)
 {
@@ -316,62 +304,7 @@ int School::delete_student()
 	return 0;
 }
 
-void department::file_out()
-{
-	string file_path="cache/"+department_name;
-	student_file_out(file_path);
-	course_file_out(file_path);
-}
 
-void department::student_file_out(string file)
-{
-	string file_path=file+"/student.txt";
-	fstream myoperate;
-	myoperate.open(file_path.c_str(), ofstream::out);
-	if (myoperate.fail())
-	{
-		cout << "文件导出失败!!!" << endl;
-		Sleep(2000);
-		return;
-	}
-	//cout<<student_list.size()<<endl;
-	for(int i(0);i<student_list.size();i++)
-	{
-		myoperate << student_list[i].student_ID << " ";
-		//cout<<student_list[i].student_ID << endl;
-		myoperate << student_list[i].class_ID << " ";
-		myoperate << student_list[i].student_name << " ";
-		myoperate << student_list[i].department_name << " ";
-		myoperate <<endl;
-	}
-	return;
-}
-
-void department::course_file_out(string file)
-{
-	string file_path=file+"/course.txt";
-	fstream myoperate;
-	myoperate.open(file_path.c_str(), ofstream::out);
-	if (myoperate.fail())
-	{
-		cout << "文件导出失败!!!" << endl;
-		Sleep(2000);
-		return;
-	}
-	for(int i(0);i<course_list.size();i++)
-	{
-		myoperate << "begin"<<endl;
-		myoperate << course_list[i].course_name << endl;
-		//cout<<"size "<<course_list[i].all_student_ID.size()<<endl;
-		for(int j(0);j<course_list[i].all_student_ID.size();j++)
-		{
-			myoperate << course_list[i].all_student_ID[j]<<" "<<course_list[i].score[j]<<endl;
-		}
-		myoperate <<"end"<<endl;
-	}
-	return;
-}
-	
 int School::search_student()
 {
 	int flag(1);
@@ -750,33 +683,3 @@ int School::adjust_student()
 	}
 }
 
-int course::delete_student(int ID)
-{
-	all_student_ID.erase(all_student_ID.begin()+ID);
-	score.erase(score.begin()+ID);
-	return 1;				
-}
-
-int course::add_student(int ID,int scores)
-{
-	all_student_ID.push_back(ID);
-	score.push_back(scores);
-	return 1;				
-}
-
-int student::delete_course(int id)
-{
-	course_id.erase(course_id.begin()+id);
-	return 1;
-}
-
-int student::add_course(int id)
-{
-	course_id.push_back(id);
-	return 1;
-}
-int course::adjust_score(int id,int scores)
-{
-	score[id]=scores;
-	return 0;
-}

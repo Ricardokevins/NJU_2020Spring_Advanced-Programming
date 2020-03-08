@@ -1,51 +1,12 @@
 #pragma once
-
+#include"course.h"
+#include"student.h"
+#include"department.h"
 #include<string>
 #include<vector>
 #include<iostream>
 using namespace std;
 
-class student;
-class School;
-class course {
-public:
-	string course_name;
-	vector<int>all_student_ID;
-	vector<int>score;
-	int delete_student(int ID);
-	int adjust_score(int id,int score);
-	int add_student(int id,int score);
-	int show_infor();
-};
-
-class student {
-public:	
-	student(int a,string b,string c,int d){
-	student_ID = a;
-	student_name = b;
-	department_name = c;
-	class_ID = d;
-}
-	int add_course(int id);
-	int delete_course(int id);
-	
-	int display_info();
-	int student_ID;
-	string student_name;
-	string department_name;
-	int class_ID;
-	vector<int>course_id;
-};
-
-class department {
-public:
-	string department_name;
-	vector<student> student_list;
-	vector<course>course_list;
-	void student_file_out(string file);
-	void course_file_out(string file);
-	void file_out();
-};
 
 class School {
 public:
