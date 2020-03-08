@@ -65,8 +65,6 @@ int School::my_run()
 	return 0;
 }
 
-
-
 vector<course> School::course_file_in(string path)
 {
 	fstream infile;
