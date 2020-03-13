@@ -19,10 +19,10 @@ int School::show_menu()
 		printf("\t\t\t｜                              \n");
 		printf("\t\t\t｜  1->增加学生                 \n");
 		printf("\t\t\t｜  2->删除学生               \n");
-		printf("\t\t\t｜  2->查找学生               \n");
-		printf("\t\t\t｜  2->修改学生              \n");
-		printf("\t\t\t｜  2->显示学生               \n");
-		printf("\t\t\t｜  6->显示学生               \n");
+		printf("\t\t\t｜  3->查找学生               \n");
+		printf("\t\t\t｜  4->修改学生              \n");
+		printf("\t\t\t｜  5->显示学生               \n");
+		printf("\t\t\t｜  6->return                \n");
 		printf("\t\t\t｜  请输入选项[]                  \n");
 		printf("\t\t\t｜                              \n");
 		printf("\t\t\t＋==============================＋\n");
@@ -46,6 +46,9 @@ int School::show_menu()
 	}
 }
 
+
+
+
 int School::my_run()
 {
 	int opnumtemp;
@@ -60,6 +63,7 @@ int School::my_run()
 			case 1:insert_student(); break;
 			case 2:delete_student(); break;
 			case 3:search_student(); break;
+			case 4:adjust_student(); break;
 		}
 	}
 	return 0;
@@ -476,6 +480,15 @@ int School::adjust_student()
 			int temp2;
 			cout<<"请输入"<<endl;
 			cin>>temp2;
+			for(int i(0);i<my_school[temp_de_ID].student_list.size();i++)
+			{
+				if(i<my_school[temp_de_ID].student_list[i].student_ID==temp2&&i!=temp_de_pos)
+				{
+					cout<<"这个学号已经被占用，返回中"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+			}
 			my_school[temp_de_ID].student_list[temp_de_pos].student_ID=temp2;
 			cout<<"修改成功"<<endl;
 			Sleep(2000);
