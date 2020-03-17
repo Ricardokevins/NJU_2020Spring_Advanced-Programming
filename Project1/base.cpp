@@ -438,21 +438,20 @@ int School::adjust_student()
 		cout << left << setw(20) << my_school[temp_de_ID].student_list[temp_de_pos].department_name  << endl;
 		cout << endl;
 
-		cout << left << setw(30) << "课程名" << "|";
-		cout << left << setw(30) << "成绩" << endl;
+		cout << left << setw(35) << "课程名" << "|";
+		cout << left << setw(35) << "成绩" << endl;
 		for(int i(0);i< my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();i++)
 		{
-			cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
-			cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
+			cout<< left << setw(35)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
+			cout<< left << setw(35)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
 		}
 		cout<<endl;
-		cout<<"输入C继续,任意键回去重选"<<endl;
+		cout<<"输入C继续,任意键返回"<<endl;
 		string a;
 		cin>>a;
 		if(a!="C")
 		{
-			search_r=1;
-			continue;
+			return 0;
 		}
 		system("cls");
 		system("color f1");
@@ -482,7 +481,7 @@ int School::adjust_student()
 			cin>>temp2;
 			for(int i(0);i<my_school[temp_de_ID].student_list.size();i++)
 			{
-				if(i<my_school[temp_de_ID].student_list[i].student_ID==temp2&&i!=temp_de_pos)
+				if(my_school[temp_de_ID].student_list[i].student_ID==temp2&&i!=temp_de_pos)
 				{
 					cout<<"这个学号已经被占用，返回中"<<endl;
 					Sleep(2000);
