@@ -21,8 +21,8 @@ int School::show_menu()
 		printf("\t\t\t｜  2->删除学生               \n");
 		printf("\t\t\t｜  3->查找学生               \n");
 		printf("\t\t\t｜  4->修改学生              \n");
-		printf("\t\t\t｜  5->显示学生               \n");
-		printf("\t\t\t｜  6->return                \n");
+		printf("\t\t\t｜  5->显示（院系，班级，课程）                \n");
+		printf("\t\t\t｜  6->退出系统               \n");
 		printf("\t\t\t｜  请输入选项[]                  \n");
 		printf("\t\t\t｜                              \n");
 		printf("\t\t\t＋==============================＋\n");
@@ -54,7 +54,7 @@ int School::my_run()
 	int opnumtemp;
 	opnumtemp = 100;
 	file_in();
-	while (opnumtemp != 3)
+	while (opnumtemp != 6)
 	{
 		opnumtemp = show_menu();
 		switch (opnumtemp)
@@ -64,6 +64,7 @@ int School::my_run()
 			case 2:delete_student(); break;
 			case 3:search_student(); break;
 			case 4:adjust_student(); break;
+			case 5:display_info(); break;
 		}
 	}
 	return 0;
@@ -693,3 +694,226 @@ int School::adjust_student()
 	}
 }
 
+int School::display_info()
+{
+	while(1)
+	{
+		system("cls");
+		system("color f1");
+		printf("\n\n\t\t\t＋==============================＋\n");
+		printf("\t\t\t｜                              \n");
+		printf("\t\t\t｜  1->查看院系                 \n");
+		printf("\t\t\t｜  2->查看班级               \n");
+		printf("\t\t\t｜  3->查看课程               \n");
+		printf("\t\t\t｜  4->不看了           \n");
+		printf("\t\t\t｜  请输入选项[]                  \n");
+		printf("\t\t\t｜                              \n");
+		printf("\t\t\t＋==============================＋\n");
+		rewind(stdin);
+		string temp;
+		cin>>temp;
+		rewind(stdin);
+		int res;
+		stringstream ss;
+		ss << temp;
+		ss >> res;
+		if(res==1)
+		{
+			system("cls");
+			system("color f1");
+			cout<<"输入带查询的院系名字,或输入-1放弃"<<endl;
+			string temp;
+			cin>>temp;
+			if(temp=="-1")
+				return 0;
+			for(int i(0);i<my_school.size();i++)
+			{
+				if(my_school[i].department_name==temp)
+				{
+					system("cls");
+					system("color f1");
+					cout << left << setw(10) << "系名" << "|";
+					cout << left << setw(20) << temp << "|";
+					cout << left << setw(10) << "学生数" << "|";
+					cout << left << setw(20) <<  my_school[i].student_list.size() <<  "|";
+					cout << left << setw(10) << "课程数" << "|";
+					cout << left << setw(20) <<  my_school[i].course_list.size() << endl;
+					cout<<"输入S查看学生列表，输入C查看课程列表，输入其他退出"<<endl;
+					string temp2;
+					cin>>temp2;
+					if(temp2=="S")
+					{
+						system("cls");
+						system("color f1");
+						cout << left << setw(20) <<"Student list"<<endl;
+						cout << left << setw(10) << "学号" << "|";
+						cout << left << setw(20) << "名字" << "|";
+						cout << left << setw(10) << "班级号" << endl;
+						for(int j(0);j<my_school[i].student_list.size();j++)
+						{
+							cout << left << setw(10) << my_school[i].student_list[j].student_ID << "|";
+							cout << left << setw(20) << my_school[i].student_list[j].student_name << "|";
+							cout << left << setw(10) << my_school[i].student_list[j].class_ID << endl;
+						}
+						string temp3;
+						cout<<"输入任意退出"<<endl;
+						cin>>temp3;
+						return 1;
+					}
+					else
+					{
+						if(temp2=="C")
+						{
+							system("cls");
+							system("color f1");
+							cout << left << setw(20) <<"Course List"<<endl;
+							cout << left << setw(30) << "课程名" << "|";
+							cout << left << setw(10) << "人数" << "|";
+							cout << left << setw(30) << "平均分" <<endl;
+							for(int j(0);j<my_school[i].course_list.size();j++)
+							{
+								cout << left << setw(30) << my_school[i].course_list[j].course_name<< "|";
+								cout << left << setw(10) << my_school[i].course_list[j].all_student_ID.size() << "|";
+								int total_score=0;
+								for(int l(0);l<my_school[i].course_list[j].score.size();l++)
+								{
+									total_score+=my_school[i].course_list[j].score[l];
+								}
+								double average=total_score*1.0/my_school[i].course_list[j].all_student_ID.size();
+								cout << left << setw(30) << average << endl;
+							}
+							rewind(stdin);
+							string temp3;
+							cout<<"输入任意退出"<<endl;
+							cin>>temp3;
+							return 1;
+						}
+						else
+						{
+							return 0;
+						}
+						
+					}
+					
+				}
+			}
+			cout<<"没有这个系，返回上一级"<<endl;
+			Sleep(2000);
+			return 0;
+		}
+
+		if(res==2)
+		{
+			system("cls");
+			system("color f1");
+			
+			cout<<"输入院系（指定院系才能选择班级）,或输入-1放弃"<<endl;
+			string temp;
+			cin>>temp;
+			if(temp=="-1")
+				return 0;
+			for(int i(0);i<my_school.size();i++)
+			{
+				if(my_school[i].department_name==temp)
+				{
+					system("cls");
+					system("color f1");		
+					cout<<"输入班级的编号,或输入-1放弃"<<endl;
+					int temp2;
+					cin>>temp2;
+					if(temp2==-1)
+						return 0;
+					system("cls");
+					system("color f1");
+					cout << left << setw(20) <<"Student list"<<endl;
+					cout << left << setw(10) << "学号" << "|";
+					cout << left << setw(20) << "名字" << "|";
+					cout << left << setw(10) << "班级号" << endl;
+					for(int j(0);j<my_school[i].student_list.size();j++)
+					{
+						if(my_school[i].student_list[j].class_ID==temp2)
+						{
+							cout << left << setw(10) << my_school[i].student_list[j].student_ID << "|";
+							cout << left << setw(20) << my_school[i].student_list[j].student_name << "|";
+							cout << left << setw(10) << my_school[i].student_list[j].class_ID << endl;
+						}
+					}
+					string temp3;
+					cout<<"输入任意退出"<<endl;
+					cin>>temp3;
+					return 1;
+
+				}
+			}
+			cout<<"没有这个系，返回上一级"<<endl;
+			Sleep(2000);
+			return 0;
+		}
+
+		if(res==3)
+		{
+			system("cls");
+			system("color f1");
+			
+			cout<<"输入院系（指定院系才能选择课程）,或输入-1放弃"<<endl;
+			string temp;
+			cin>>temp;
+			if(temp=="-1")
+				return 0;
+			for(int i(0);i<my_school.size();i++)
+			{
+				if(my_school[i].department_name==temp)
+				{
+					system("cls");
+					system("color f1");		
+					cout<<"输入课程的名字,或输入-1放弃"<<endl;
+					string temp2;
+					cin>>temp2;
+					if(temp2=="-1")
+						return 0;
+					system("cls");
+					system("color f1");
+					for(int j(0);j<my_school[i].course_list.size();j++)
+					{
+						if(my_school[i].course_list[j].course_name==temp2)
+						{
+							cout << left << setw(20) <<"Student list of this course"<<endl;
+							cout << left << setw(10) << "学号" << "|";
+							cout << left << setw(20) << "名字" << "|";
+							cout << left << setw(10) << "班级号" << "|";
+							cout << left << setw(20) << "成绩"<< endl;		
+							for(int l(0);l<my_school[i].course_list[j].all_student_ID.size();l++)
+							{
+								cout << left << setw(10) << my_school[i].student_list[my_school[i].course_list[j].all_student_ID[l]].student_ID << "|";
+								cout << left << setw(20) << my_school[i].student_list[my_school[i].course_list[j].all_student_ID[l]].student_name << "|";
+								cout << left << setw(10) <<  my_school[i].student_list[my_school[i].course_list[j].all_student_ID[l]].class_ID<< "|";
+								cout << left << setw(20) << my_school[i].course_list[j].score[l] << endl;
+							}
+						}
+						string temp3;
+						cout<<"输入任意退出"<<endl;
+						cin>>temp3;
+						return 1;
+					}
+					cout<<"没有这个课，返回上一级"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+			}
+			cout<<"没有这个系，返回上一级"<<endl;
+			Sleep(2000);
+			return 0;
+		}
+
+		if(res==4)
+		{
+			return 0;
+		}
+
+		else
+		{
+			return 0;
+		}
+		
+	}
+}

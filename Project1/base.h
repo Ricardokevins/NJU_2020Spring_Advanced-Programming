@@ -19,6 +19,7 @@ public:
 	int file_in();
 	int show_menu();
 	int my_run();
+	int display_info();
 	vector<student> student_file_in(string file);
 	vector<course> course_file_in(string file);
 	
