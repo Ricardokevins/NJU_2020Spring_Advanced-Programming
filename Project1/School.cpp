@@ -377,8 +377,8 @@ int School::search_student()
 	cout << left << setw(30) << "成绩" << endl;
 	for(int i(0);i< my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();i++)
 	{
-		cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
-		cout<< left << setw(20)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
+		cout<< left << setw(30)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].course_name<<"|";
+		cout<< left << setw(30)<<my_school[temp_de_ID].course_list[my_school[temp_de_ID].student_list[temp_de_pos].course_id[i]].score[temp_de_pos]<<endl;
 	}
 	cout<<endl;
 	cout<<"输入C继续,其他任意键返回"<<endl;
@@ -469,9 +469,9 @@ int School::adjust_student()
 		printf("\t\t\t｜                              \n");
 		printf("\t\t\t｜  1->修改学号                 \n");
 		printf("\t\t\t｜  2->修改名字               \n");
-		printf("\t\t\t｜  2->修改班级               \n");
-		printf("\t\t\t｜  2->修改课程相关           \n");
-		printf("\t\t\t｜  2->转系               \n");
+		printf("\t\t\t｜  3->修改班级               \n");
+		printf("\t\t\t｜  4->修改课程相关           \n");
+		printf("\t\t\t｜  5->转系               \n");
 		printf("\t\t\t｜  6->不改了算了               \n");
 		printf("\t\t\t｜  请输入选项[]                  \n");
 		printf("\t\t\t｜                              \n");
@@ -531,7 +531,7 @@ int School::adjust_student()
 			printf("\t\t\t｜                              \n");
 			printf("\t\t\t｜  1->加课                 \n");
 			printf("\t\t\t｜  2->退课               \n");
-			printf("\t\t\t｜  2->改成绩               \n");
+			printf("\t\t\t｜  3->改成绩               \n");
 			printf("\t\t\t｜  6->不改了算了               \n");
 			printf("\t\t\t｜  请输入选项[]                  \n");
 			printf("\t\t\t｜                              \n");
@@ -557,6 +557,21 @@ int School::adjust_student()
 						find_flag=1;
 						find_pos=i;
 						break;
+					}
+				}
+				if(find_flag==0)
+				{
+					cout<<"本系没开设这个课"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+				for(int j(0);j<my_school[temp_de_ID].student_list[temp_de_pos].course_id.size();j++)
+				{
+					if(my_school[temp_de_ID].student_list[temp_de_pos].course_id[j]==find_pos)
+					{
+						cout<<"已有课程，禁止重复添加"<<endl;
+						Sleep(2000);
+						return 0;
 					}
 				}
 				if(find_flag)
@@ -694,6 +709,7 @@ int School::adjust_student()
 			}
 			student cache_a=student(my_school[temp_de_ID].student_list[temp_de_pos]);
 			my_school[temp_de_ID].student_list.erase(my_school[temp_de_ID].student_list.begin()+temp_de_pos);
+			cache_a.department_name=de_name;
 			my_school[depart_num].student_list.push_back(cache_a);
 			cout<<"转系完成"<<endl;
 			Sleep(2000);

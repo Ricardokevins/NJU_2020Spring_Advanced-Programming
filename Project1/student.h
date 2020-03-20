@@ -14,7 +14,6 @@ public:
 }
 	int add_course(int id);
 	int delete_course(int id);
-	
 	int display_info();
 	int student_ID;
 	string student_name;
