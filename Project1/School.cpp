@@ -4,7 +4,7 @@
 #include <sstream>
 #include <Windows.h>
 #include<iomanip>
-#include"base.h"
+#include"School.h"
 using namespace std;
 
 
@@ -270,6 +270,15 @@ int School::insert_student()
 		else
 		{
 			student temp(temp_ID, temp_name, temp_department_name, temp_class_ID);
+			for(int i(0);i<my_school[department_code].student_list.size();i++)
+			{
+				if(my_school[department_code].student_list[i].student_ID==temp_ID)
+				{
+					cout<<"学号已经被占用，不允许学号重复"<<endl;
+					Sleep(2000);
+					return 0;
+				}
+			}
 			my_school[department_code].student_list.push_back(temp);		
 			return 1;
 		}

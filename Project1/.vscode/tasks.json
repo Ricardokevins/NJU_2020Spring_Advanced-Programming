@@ -10,8 +10,8 @@
             "args": [//编译时候的参数
                 "-g",//添加gdb调试选项
                 "${file}",
-                "d:/Code/Advanced_Programming/Big_Project/project1/base.cpp",
-                "d:/Code/Advanced_Programming/Big_Project/project1/base.h",
+                "d:/Code/Advanced_Programming/Big_Project/project1/School.cpp",
+                "d:/Code/Advanced_Programming/Big_Project/project1/School.h",
                 "d:/Code/Advanced_Programming/Big_Project/project1/student.cpp",
                 "d:/Code/Advanced_Programming/Big_Project/project1/student.h",
                 "d:/Code/Advanced_Programming/Big_Project/project1/course.cpp",

@@ -1,4 +1,4 @@
-#include"base.h"
+#include"School.h"
 #include"student.h"
 #include"course.h"
 #include"department.h"
@@ -11,6 +11,6 @@ int main()
 	b.my_run();
 	int a;
 	cout<<"come to end "<<endl;
-	cin>>a;
+	Sleep(3000);
 	return 0;
 }
