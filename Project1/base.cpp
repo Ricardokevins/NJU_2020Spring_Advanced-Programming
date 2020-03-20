@@ -721,7 +721,16 @@ int School::display_info()
 		{
 			system("cls");
 			system("color f1");
-			cout<<"输入带查询的院系名字,或输入-1放弃"<<endl;
+			cout << left << setw(20) << "系名" << "|";
+			cout << left << setw(20) << "学生数" << "|";
+			cout << left << setw(20) << "课程数" << endl;
+			for(int i(0);i<my_school.size();i++)
+			{				
+				cout << left << setw(20) << my_school[i].department_name << "|";				
+				cout << left << setw(20) <<  my_school[i].student_list.size() <<  "|";				
+				cout << left << setw(20) <<  my_school[i].course_list.size() << endl;
+			}
+			cout<<"输入带查询的院系名字查看详情,或输入-1放弃"<<endl;
 			string temp;
 			cin>>temp;
 			if(temp=="-1")
