@@ -12,4 +12,4 @@ public:
 class Mytank:public Tank{
 public:
     
-}
+};
