@@ -1,12 +1,14 @@
-#include <Windows.h>
-#include<iostream>
-#include<io.h>//使用_setmode(_fileno(stdout), _O_U16TEXT)必须加的头文件
-#include<vector>
-#include<fcntl.h>//使用_setmode(_fileno(stdout), _O_U16TEXT)必须加的头文件
-using namespace std;
-
+#pragma once
+#include"Tank.h"
+#include "tool.h"
 class Game{
 public:
+    vector<Tank*> tank;
+    vector<Bullet> bullet;
     int run();
+    void display_main_GUI();
+    void display_info_GUI();
+    void display_map();
+    void clean_screen();
     int display();
 };
