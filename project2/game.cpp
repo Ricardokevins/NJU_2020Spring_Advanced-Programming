@@ -33,14 +33,19 @@ void Game::display_main_GUI()
 	wcout << L"  ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔  ";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_BLUE);
 	wcout << L" ﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊﹊\n";
+    display_info_GUI();
+
 	//SideScreen();  //打印副屏幕
 }
 
 void Game::display_map()
 {
     for (int j = 0; j < 41; j++)
+    {
 		for (int i = 0; i < 41; i++)
-			if (map[i][j] == 6)
+        {
+            //wcout<<map[i][j];
+            if (map[i][j] == 6)
 			{
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_GREEN
 					| FOREGROUND_RED | FOREGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_BLUE);
@@ -58,6 +63,7 @@ void Game::display_map()
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED | BACKGROUND_GREEN | BACKGROUND_RED);
 				GoToxy(2 * j, i);
 				wcout << L"▓";
+                //wcout<<"Hello World";
 			}
 			else if (map[i][j] == 5)
 			{
@@ -65,6 +71,8 @@ void Game::display_map()
 				GoToxy(2 * j, i);
 				wcout << L"～";
 			}
+        }
+    }		
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_RED | FOREGROUND_GREEN);
 	GoToxy(38, 37);	 wcout << L"◣★◢";
 	GoToxy(38, 38);	 wcout << L"███";    //∵无论地图怎么变,家所在位置不变,且家的字符多种,不方便用上述方式打印
@@ -104,7 +112,7 @@ void Game::display_info_GUI()
 	GoToxy(93, 29);
 	wcout << L"x 键 射击";
 	GoToxy(89, 31);
-	wcout << "+ - 调整游戏速度";
+	wcout << L"+ - 调整游戏速度";
 	GoToxy(90, 33);
 	wcout << L"游戏速度范围1~20";
 	GoToxy(90, 35);
@@ -119,7 +127,10 @@ int Game::run()
     //display();
     HideCursor();                         //隐藏光标
 	system("mode con cols=112 lines=42"); //控制窗口大小
-	display_main_GUI();                             //打印游戏主体框架
+	display_main_GUI(); //打印游戏主体框架
+    GetMap(1);            //获取map数据
+    display_map();
+    return 0;
 }
 
 int Game::display()

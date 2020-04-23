@@ -12,6 +12,7 @@ public:
 
 class Tank:public game_item{
 public:
+    Tank(int a);
     int type;
     int stop;
     int revive;
