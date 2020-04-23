@@ -18,6 +18,9 @@ void modeset(int w,int h) {
 
 int main()
 {
+	_setmode(_fileno(stdout), _O_U16TEXT);
+	wcout<<L"今天的天气怎么样？";
+	wcout<<L"  ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁  ";
     Game a;
     a.run();
     return 0;
