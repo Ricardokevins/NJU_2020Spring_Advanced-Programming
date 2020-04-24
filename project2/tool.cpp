@@ -4,11 +4,11 @@ int map[41][41];  //地图二维数组
 int key_x;        // X键是否被“读入”的变量，也是子弹是否可以发射的变，
 int bul_num;      //子弹编号
 int position;     //位置计数,对应AI坦克生成位置,-1为左位置,0为中间,1为右,2为我的坦克位置
-int speed = 7;      //游戏速度,调整用
+int speed = 3;      //游戏速度,调整用
 int level = 1;      //游戏关卡数
 int score = 0;      //游戏分数
 int remain_enemy; //剩余敌人(未出现的敌人)
-
+LevInfo level_info[MAX_LEVEL] = { {-1,-1},{3,-1},{-1,3},{2,3},{2,3},{2,3},{2,3},{2,3} };   //初始化，-1代表没有该类型坦克
 
 void HideCursor()  //隐藏光标
 {                  //CONSOLE_CURSOR_INFO结构体包含控制台光标的信息,DWORD dwSize光标百分比厚度（1~100）和BOOL bVisible光标是否可见
@@ -57,29 +57,29 @@ void ColorChoose(int color)   //颜色选择函数
 wstring string2wstring(string str)
 {
 	wstring result;
-	//获取缓冲区大小，并申请空间，缓冲区大小按字符计算  
+	//获取缓冲区大小，并申请空间，缓冲区大小按字符计算
 	int len = MultiByteToWideChar(CP_ACP, 0, str.c_str(), str.size(), NULL, 0);
 	TCHAR* buffer = new TCHAR[len + 1];
-	//多字节编码转换成宽字节编码  
+	//多字节编码转换成宽字节编码
 	MultiByteToWideChar(CP_ACP, 0, str.c_str(), str.size(), buffer, len);
-	buffer[len] = '\0';             //添加字符串结尾  
-	//删除缓冲区并返回值  
+	buffer[len] = '\0';             //添加字符串结尾
+	//删除缓冲区并返回值
 	result.append(buffer);
 	delete[] buffer;
 	return result;
 }
 
-//将wstring转换成string  
+//将wstring转换成string
 string wstring2string(wstring wstr)
 {
 	string result;
-	//获取缓冲区大小，并申请空间，缓冲区大小事按字节计算的  
+	//获取缓冲区大小，并申请空间，缓冲区大小事按字节计算的
 	int len = WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), wstr.size(), NULL, 0, NULL, NULL);
 	char* buffer = new char[len + 1];
-	//宽字节编码转换成多字节编码  
+	//宽字节编码转换成多字节编码
 	WideCharToMultiByte(CP_ACP, 0, wstr.c_str(), wstr.size(), buffer, len, NULL, NULL);
 	buffer[len] = '\0';
-	//删除缓冲区并返回值  
+	//删除缓冲区并返回值
 	result.append(buffer);
 	delete[] buffer;
 	return result;
@@ -478,7 +478,7 @@ void GetMap(int level)      //地图存放函数
 	for (i = 0; i < 41; i++)
 		for (j = 0; j < 41; j++)
 		{
-			map[i][j] = Map[level - 1][i][j];     
+			map[i][j] = Map[level - 1][i][j];
 			//wcout<<map[i][j];
 		}
 }
